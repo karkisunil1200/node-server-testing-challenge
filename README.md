@@ -4,11 +4,13 @@
 
 - automated testing.
 - jest testing framework.
-- supertest module.
+- supertest module
 
 ## Assignment
 
-For this project you will use `Test Driven Development` to create a RESTful API using `Node.js` and `Express` that publishes a set of endpoints to manage a _resource_ of your choosing. Data can be stored in memory, adding a **test database is optional**.
+For this project you will use `Test Driven Development` to create a RESTful API using `Node.js` and
+`Express` that publishes a set of endpoints to manage a _resource_ of your choosing. Data can be
+stored in memory, adding a **test database is optional**.
 
 ## Download Project and Install Dependencies
 
