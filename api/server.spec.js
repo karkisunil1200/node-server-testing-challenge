@@ -1,41 +1,21 @@
-const server = require('./server');
-const supertest = require('supertest');
+const request = require('supertest');
+const server = require('./server.js');
 const db = require('../data/dbConfig');
 
-// afterEach(async () => {
-//   await db('users').truncate();
-// });
+beforeEach(() => {
+  return db.migrate.rollback().then(() => db.migrate.latest());
+});
 
-describe('server', () => {
-  it('can run the test', () => {
-    expect(true).toBeTruthy();
-  });
+test('POST /api/auth/register to be successful', async () => {
+  const response = await request(server)
+    .post('/api/auth/register')
+    .send({username: 'sunil', password: 'sunil'});
 
-  describe('GET /', () => {
-    it('should return http status code 200', () => {
-      return supertest(server)
-        .get('/')
-        .then(res => {
-          expect(res.status).toBe(200);
-        });
-    });
-  });
+  expect(response.status).toBe(200);
+  expect(response.body).toMatchObject({username: 'sunil'});
+});
 
-  describe('GET /api/users', () => {
-    it('should return 200 of users', () => {
-      return supertest(server)
-        .get('/api/users')
-        .then(response => {
-          expect(response.status).toBe(200);
-        });
-    });
-
-    it('should return 404 for the users if failed', () => {
-      return superterst(server)
-        .get('/api/users')
-        .then(response => {
-          expect(response.status).toBe(404);
-        });
-    });
-  });
+test('DELETE /api/users/:id', async () => {
+  const response = await request(server).delete('/api/auth/delete/2');
+  expect(response.status).toBe(200);
 });

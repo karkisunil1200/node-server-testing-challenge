@@ -15,7 +15,7 @@ router.post('/register', (req, res) => {
 
   Users.addUsers(credentials)
     .then(user => {
-      res.status(500).json({data: user});
+      res.status(200).json({data: user, username: credentials.username});
     })
     .catch(err => {
       res.status(500).json({error: err.message});
