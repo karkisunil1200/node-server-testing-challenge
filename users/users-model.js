@@ -3,7 +3,8 @@ const db = require('../data/dbConfig');
 module.exports = {
   addUsers,
   getUsers,
-  findBy
+  findBy,
+  remove
 };
 
 function addUsers(user) {
@@ -22,4 +23,12 @@ function findBy(filter) {
     .select('*')
     .from('users')
     .where(filter);
+}
+
+function remove(id) {
+  return db
+    .select('*')
+    .from('users')
+    .where({id})
+    .del();
 }
