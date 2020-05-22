@@ -7,7 +7,7 @@ const server = express();
 server.use(express.json());
 
 server.get('/', (req, res) => {
-  res.send({server: 'up'});
+  res.status(200).json({serve: 'up'});
 });
 
 server.use('/api/auth', authRouter);
